@@ -12,7 +12,6 @@
     <modules>
         <module>micro-product</module>
         <module>micro-common</module>
-        <module>micro-mybatis</module>
     </modules>
 
     <parent>
@@ -27,7 +26,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipTests>true</skipTests>
         <!-- Spring Cloud 版本号 -->
-        <spring-cloud.version>2020.0.0</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR11</spring-cloud.version>
         <!-- 数据库 版本号 -->
         <mysql-connector.version>8.0.23</mysql-connector.version>
         <mybatis.version>3.5.6</mybatis.version>
@@ -49,10 +48,11 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}$</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>runtime</scope>
             </dependency>
+            
             <!-- Mysql数据库驱动 -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -85,4 +85,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!-- Mybatis yml 配置插件 -->
+                    <groupId>io.github.javthon</groupId>
+                    <artifactId>mybatis-generator-yml-maven-plugin</artifactId>
+                    <version>0.0.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

@@ -1,0 +1,29 @@
+# mybatisGenerator 配置文件
+mybatisGenerator:
+  datasource:
+    type: mysql
+    address: localhost:3306
+    db: micro?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+  targetPackage:
+    ## 生成 domain 和 mapper 路径
+    model: com.micro.mall.product.domain
+    mapper: com.micro.mall.product.dao
+    javaXmlFilesSamePackage: false
+
+  targetRuntime: MyBatis3
+  mapperSuffixName: mapper
+  java8: false
+  disableExample: true
+  ## 插件支持
+  plugins:
+    comment: true
+    lombok: true
+    swagger: true
+    mapperAnnotation: false
+    serializable: false
+
+  tables:
+    - user

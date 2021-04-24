@@ -23,4 +23,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.github.javthon</groupId>
+                <artifactId>mybatis-generator-yml-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
