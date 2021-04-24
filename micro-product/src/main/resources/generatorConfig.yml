@@ -3,7 +3,7 @@ mybatisGenerator:
   datasource:
     type: mysql
     address: localhost:3306
-    db: micro?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    db: micro_product?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
 
@@ -25,5 +25,6 @@ mybatisGenerator:
     mapperAnnotation: false
     serializable: false
 
+  # 需要生成的表
   tables:
     - user
