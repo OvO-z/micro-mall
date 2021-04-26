@@ -3,14 +3,14 @@ mybatisGenerator:
   datasource:
     type: mysql
     address: localhost:3306
-    db: micro_product?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    db: mall_product?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: root
 
   targetPackage:
     ## 生成 domain 和 mapper 路径
-    model: com.micro.mall.product.domain
-    mapper: com.micro.mall.product.dao
+    model: com.micro.mall.product.model
+    mapper: com.micro.mall.product.mapper
     javaXmlFilesSamePackage: false
 
   targetRuntime: MyBatis3
@@ -27,4 +27,5 @@ mybatisGenerator:
 
   # 需要生成的表
   tables:
-    - user
+    - category
+    - brand
