@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 29/04/2021 16:19:08
+ Date: 29/04/2021 20:51:10
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `brand`  (
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   `first_word` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '品牌首字母',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品品牌' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品品牌\r\n' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for category
@@ -112,6 +112,21 @@ CREATE TABLE `product`  (
   `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品基础信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品基础信息表\r\n' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for sku_stock
+-- ----------------------------
+DROP TABLE IF EXISTS `sku_stock`;
+CREATE TABLE `sku_stock`  (
+  `id` bigint(20) NOT NULL COMMENT '主键（自增ID）',
+  `product_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
+  `sku_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'SKU编码',
+  `price` decimal(10, 2) DEFAULT NULL COMMENT '价格',
+  `stock` int(11) DEFAULT 0 COMMENT '库存',
+  `low_stock` int(11) DEFAULT NULL COMMENT '预警库存',
+  `sale` int(11) DEFAULT NULL COMMENT '销量',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品SKU表' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
