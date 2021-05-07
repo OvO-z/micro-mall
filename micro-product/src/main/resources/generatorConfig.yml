@@ -5,7 +5,7 @@ mybatisGenerator:
     address: localhost:3306
     db: mall_product?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: 123456
 
   targetPackage:
     ## 生成 domain 和 mapper 路径
@@ -29,3 +29,8 @@ mybatisGenerator:
   tables:
     - category
     - brand
+    - product
+    - product_property_value
+    - property
+    - sku_stock
+    - type
