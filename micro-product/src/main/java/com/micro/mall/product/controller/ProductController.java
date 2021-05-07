@@ -11,4 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "商品管理模块")
 @RestController("/product")
 public class ProductController {
+
 }

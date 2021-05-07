@@ -1,6 +1,5 @@
 package com.micro.mall.product.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.micro.mall.product.dao.BrandDao;
 import com.micro.mall.product.dto.BrandParam;
 import com.micro.mall.product.mapper.BrandMapper;
@@ -8,9 +7,10 @@ import com.micro.mall.product.model.Brand;
 import com.micro.mall.product.service.BrandService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 /**
  * @Author: QAQ
@@ -33,7 +33,7 @@ public class BrandServiceImpl implements BrandService {
     public int createBrand(BrandParam param) {
         Brand brand = new Brand();
         BeanUtils.copyProperties(param, brand);
-        if (StringUtils.isEmpty(brand.getFirstWord())) {
+        if (isEmpty(brand.getFirstWord())) {
             brand.setFirstWord(brand.getName().substring(0, 1));
         }
         return brandMapper.insertSelective(brand);
@@ -44,11 +44,10 @@ public class BrandServiceImpl implements BrandService {
         Brand brand = new Brand();
         BeanUtils.copyProperties(param, brand);
         brand.setId(id);
-        if (StringUtils.isEmpty(brand.getFirstWord())) {
+        if (isEmpty(brand.getFirstWord())) {
             brand.setFirstWord(brand.getName().substring(0, 1));
         }
-        // 更新商品中的品牌名
-        // TODO
+        // TODO 更新商品中的品牌名
         return brandMapper.updateByPrimaryKey(brand);
     }
 
