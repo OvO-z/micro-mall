@@ -2,19 +2,22 @@ package com.micro.mall.product.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 import lombok.Data;
 
 /**
+ * 商品品牌
  * brand
  * @author 24367
- * @date 2021-04-26 10:15:17
+ * @date 2021-05-07 15:34:40
  */
 @ApiModel(value="com.micro.mall.product.model.Brand")
 @Data
 public class Brand {
     /**
+     * 主键（自增ID）
      */
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value="主键（自增ID）")
     private Long id;
 
     /**
@@ -24,56 +27,38 @@ public class Brand {
     private String name;
 
     /**
-     * 首字母
+     * 品牌网站
      */
-    @ApiModelProperty(value="首字母")
-    private String firstLetter;
+    @ApiModelProperty(value="品牌网站")
+    private String web;
 
     /**
-     * 排序
+     * 品牌序列
      */
-    @ApiModelProperty(value="排序")
+    @ApiModelProperty(value="品牌序列")
     private Integer sort;
 
     /**
-     * 是否为品牌制造商：0->不是；1->是
+     * 品牌状态：1- 可用， 0为不可用 
      */
-    @ApiModelProperty(value="是否为品牌制造商：0->不是；1->是")
-    private Integer factoryStatus;
+    @ApiModelProperty(value="品牌状态：1- 可用， 0为不可用 ")
+    private Integer status;
 
     /**
-     * 是否显示
+     * 创建人
      */
-    @ApiModelProperty(value="是否显示")
-    private Integer showStatus;
+    @ApiModelProperty(value="创建人")
+    private Long createBy;
 
     /**
-     * 产品数量
+     * 创建时间
      */
-    @ApiModelProperty(value="产品数量")
-    private Integer productCount;
+    @ApiModelProperty(value="创建时间")
+    private Date createTime;
 
     /**
-     * 产品评论数量
+     * 品牌首字母
      */
-    @ApiModelProperty(value="产品评论数量")
-    private Integer productCommentCount;
-
-    /**
-     * 品牌logo
-     */
-    @ApiModelProperty(value="品牌logo")
-    private String logo;
-
-    /**
-     * 专区大图
-     */
-    @ApiModelProperty(value="专区大图")
-    private String bigPic;
-
-    /**
-     * 品牌故事
-     */
-    @ApiModelProperty(value="品牌故事")
-    private String brandStory;
+    @ApiModelProperty(value="品牌首字母")
+    private String firstWord;
 }

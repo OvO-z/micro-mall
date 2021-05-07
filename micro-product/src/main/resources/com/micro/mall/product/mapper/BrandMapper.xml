@@ -4,30 +4,19 @@
   <resultMap id="BaseResultMap" type="com.micro.mall.product.model.Brand">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="first_letter" jdbcType="VARCHAR" property="firstLetter" />
+    <result column="web" jdbcType="VARCHAR" property="web" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="factory_status" jdbcType="INTEGER" property="factoryStatus" />
-    <result column="show_status" jdbcType="INTEGER" property="showStatus" />
-    <result column="product_count" jdbcType="INTEGER" property="productCount" />
-    <result column="product_comment_count" jdbcType="INTEGER" property="productCommentCount" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
-    <result column="big_pic" jdbcType="VARCHAR" property="bigPic" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.micro.mall.product.model.Brand">
-    <result column="brand_story" jdbcType="LONGVARCHAR" property="brandStory" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_by" jdbcType="BIGINT" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="first_word" jdbcType="VARCHAR" property="firstWord" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, first_letter, sort, factory_status, show_status, product_count, product_comment_count, 
-    logo, big_pic
+    id, name, web, sort, status, create_by, create_time, first_word
   </sql>
-  <sql id="Blob_Column_List">
-    brand_story
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from brand
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -36,14 +25,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.micro.mall.product.model.Brand">
-    insert into brand (id, name, first_letter, 
-      sort, factory_status, show_status, 
-      product_count, product_comment_count, logo, 
-      big_pic, brand_story)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{firstLetter,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=INTEGER}, #{factoryStatus,jdbcType=INTEGER}, #{showStatus,jdbcType=INTEGER}, 
-      #{productCount,jdbcType=INTEGER}, #{productCommentCount,jdbcType=INTEGER}, #{logo,jdbcType=VARCHAR}, 
-      #{bigPic,jdbcType=VARCHAR}, #{brandStory,jdbcType=LONGVARCHAR})
+    insert into brand (id, name, web, 
+      sort, status, create_by, 
+      create_time, first_word)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{web,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createBy,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{firstWord,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.micro.mall.product.model.Brand">
     insert into brand
@@ -54,32 +41,23 @@
       <if test="name != null">
         name,
       </if>
-      <if test="firstLetter != null">
-        first_letter,
+      <if test="web != null">
+        web,
       </if>
       <if test="sort != null">
         sort,
       </if>
-      <if test="factoryStatus != null">
-        factory_status,
+      <if test="status != null">
+        status,
       </if>
-      <if test="showStatus != null">
-        show_status,
+      <if test="createBy != null">
+        create_by,
       </if>
-      <if test="productCount != null">
-        product_count,
+      <if test="createTime != null">
+        create_time,
       </if>
-      <if test="productCommentCount != null">
-        product_comment_count,
-      </if>
-      <if test="logo != null">
-        logo,
-      </if>
-      <if test="bigPic != null">
-        big_pic,
-      </if>
-      <if test="brandStory != null">
-        brand_story,
+      <if test="firstWord != null">
+        first_word,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -89,32 +67,23 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="firstLetter != null">
-        #{firstLetter,jdbcType=VARCHAR},
+      <if test="web != null">
+        #{web,jdbcType=VARCHAR},
       </if>
       <if test="sort != null">
         #{sort,jdbcType=INTEGER},
       </if>
-      <if test="factoryStatus != null">
-        #{factoryStatus,jdbcType=INTEGER},
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
-      <if test="showStatus != null">
-        #{showStatus,jdbcType=INTEGER},
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
       </if>
-      <if test="productCount != null">
-        #{productCount,jdbcType=INTEGER},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="productCommentCount != null">
-        #{productCommentCount,jdbcType=INTEGER},
-      </if>
-      <if test="logo != null">
-        #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="bigPic != null">
-        #{bigPic,jdbcType=VARCHAR},
-      </if>
-      <if test="brandStory != null">
-        #{brandStory,jdbcType=LONGVARCHAR},
+      <if test="firstWord != null">
+        #{firstWord,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -124,61 +93,36 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="firstLetter != null">
-        first_letter = #{firstLetter,jdbcType=VARCHAR},
+      <if test="web != null">
+        web = #{web,jdbcType=VARCHAR},
       </if>
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
       </if>
-      <if test="factoryStatus != null">
-        factory_status = #{factoryStatus,jdbcType=INTEGER},
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="showStatus != null">
-        show_status = #{showStatus,jdbcType=INTEGER},
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
       </if>
-      <if test="productCount != null">
-        product_count = #{productCount,jdbcType=INTEGER},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="productCommentCount != null">
-        product_comment_count = #{productCommentCount,jdbcType=INTEGER},
-      </if>
-      <if test="logo != null">
-        logo = #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="bigPic != null">
-        big_pic = #{bigPic,jdbcType=VARCHAR},
-      </if>
-      <if test="brandStory != null">
-        brand_story = #{brandStory,jdbcType=LONGVARCHAR},
+      <if test="firstWord != null">
+        first_word = #{firstWord,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.micro.mall.product.model.Brand">
-    update brand
-    set name = #{name,jdbcType=VARCHAR},
-      first_letter = #{firstLetter,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
-      factory_status = #{factoryStatus,jdbcType=INTEGER},
-      show_status = #{showStatus,jdbcType=INTEGER},
-      product_count = #{productCount,jdbcType=INTEGER},
-      product_comment_count = #{productCommentCount,jdbcType=INTEGER},
-      logo = #{logo,jdbcType=VARCHAR},
-      big_pic = #{bigPic,jdbcType=VARCHAR},
-      brand_story = #{brandStory,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.micro.mall.product.model.Brand">
     update brand
     set name = #{name,jdbcType=VARCHAR},
-      first_letter = #{firstLetter,jdbcType=VARCHAR},
+      web = #{web,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
-      factory_status = #{factoryStatus,jdbcType=INTEGER},
-      show_status = #{showStatus,jdbcType=INTEGER},
-      product_count = #{productCount,jdbcType=INTEGER},
-      product_comment_count = #{productCommentCount,jdbcType=INTEGER},
-      logo = #{logo,jdbcType=VARCHAR},
-      big_pic = #{bigPic,jdbcType=VARCHAR}
+      status = #{status,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      first_word = #{firstWord,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

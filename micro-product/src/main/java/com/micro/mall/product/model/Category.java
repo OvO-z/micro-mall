@@ -2,25 +2,28 @@ package com.micro.mall.product.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 import lombok.Data;
 
 /**
+ * 商品分类
  * category
  * @author 24367
- * @date 2021-04-26 10:15:17
+ * @date 2021-05-07 15:34:40
  */
 @ApiModel(value="com.micro.mall.product.model.Category")
 @Data
 public class Category {
     /**
+     * 主键(自增ID)
      */
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value="主键(自增ID)")
     private Long id;
 
     /**
-     * 上级分类编号：0->一级分类
+     * 上级分类的编号：0表示一级分类
      */
-    @ApiModelProperty(value="上级分类编号：0->一级分类")
+    @ApiModelProperty(value="上级分类的编号：0表示一级分类")
     private Long parentId;
 
     /**
@@ -28,12 +31,6 @@ public class Category {
      */
     @ApiModelProperty(value="名称")
     private String name;
-
-    /**
-     * 分类级别： 0->1级；1->2级
-     */
-    @ApiModelProperty(value="分类级别： 0->1级；1->2级")
-    private Integer level;
 
     /**
      * 商品数量
@@ -48,16 +45,10 @@ public class Category {
     private String productUnit;
 
     /**
-     * 是否显示在导航栏：0->不显示；1->显示
+     * 状态：0->不显示；1->显示
      */
-    @ApiModelProperty(value="是否显示在导航栏：0->不显示；1->显示")
-    private Integer navStatus;
-
-    /**
-     * 显示状态：0->不显示；1->显示
-     */
-    @ApiModelProperty(value="显示状态：0->不显示；1->显示")
-    private Integer showStatus;
+    @ApiModelProperty(value="状态：0->不显示；1->显示")
+    private Byte status;
 
     /**
      * 排序
@@ -72,10 +63,10 @@ public class Category {
     private String icon;
 
     /**
-     * 关键字
+     * 创建时间
      */
-    @ApiModelProperty(value="关键字")
-    private String keywords;
+    @ApiModelProperty(value="创建时间")
+    private Date createTime;
 
     /**
      * 描述
