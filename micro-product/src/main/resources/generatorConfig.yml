@@ -16,7 +16,7 @@ mybatisGenerator:
   targetRuntime: MyBatis3
   mapperSuffixName: mapper
   java8: false
-  disableExample: true
+  disableExample: false
   ## 插件支持
   plugins:
     comment: true

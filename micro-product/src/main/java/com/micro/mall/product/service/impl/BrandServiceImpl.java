@@ -1,9 +1,10 @@
 package com.micro.mall.product.service.impl;
 
-import com.micro.mall.product.dao.BrandDao;
+import com.github.pagehelper.PageHelper;
 import com.micro.mall.product.dto.BrandParam;
 import com.micro.mall.product.mapper.BrandMapper;
 import com.micro.mall.product.model.Brand;
+import com.micro.mall.product.model.BrandExample;
 import com.micro.mall.product.service.BrandService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,10 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private BrandMapper brandMapper;
-    @Autowired
-    private BrandDao brandDao;
 
     @Override
     public List<Brand> listAllBrand() {
-        return brandDao.listAllBrand();
+        return brandMapper.selectByExample(new BrandExample());
     }
 
     @Override
@@ -58,14 +57,21 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public int deleteBrand(List<Long> ids) {
-        // TODO
-        return 0;
+        BrandExample example = new BrandExample();
+        example.createCriteria().andIdIn(ids);
+        return brandMapper.deleteByExample(example);
     }
 
     @Override
     public List<Brand> listBrand(String keyword, int pageNum, int pageSize) {
-        // TODO
-        return null;
+        PageHelper.startPage(pageNum, pageSize);
+        BrandExample example = new BrandExample();
+        BrandExample.Criteria criteria = example.createCriteria();
+        if (!isEmpty(keyword)) {
+            criteria.andNameLike("%" + keyword + "%");
+        }
+
+        return brandMapper.selectByExample(example);
     }
 
     @Override
@@ -74,8 +80,11 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public int updateShowStatus(List<Long> ids, Integer showStatus) {
-        // TODO
-        return 0;
+    public int updateStatus(List<Long> ids, Integer status) {
+        Brand brand = new Brand();
+        brand.setStatus(status);
+        BrandExample example = new BrandExample();
+        example.createCriteria().andIdIn(ids);
+        return brandMapper.updateByExample(brand, example);
     }
 }

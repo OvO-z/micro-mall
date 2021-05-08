@@ -49,5 +49,5 @@ public interface BrandService {
     /**
      * 修改显示状态
      */
-    int updateShowStatus(List<Long> ids, Integer showStatus); 
+    int updateStatus(List<Long> ids, Integer status);
 }
