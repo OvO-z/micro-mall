@@ -3,6 +3,7 @@ package com.micro.mall.common.api;
 /**
  * 枚举常用API操作码
  * Created by QAQ on 2021/3/24
+ * @author QAQ
  */
 public enum ResultCode implements IErrorCode{
     SUCCESS(200, "操作成功"),

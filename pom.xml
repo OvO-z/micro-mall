@@ -25,6 +25,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipTests>true</skipTests>
+        <!--通用模块 版本号-->
+        <micro-common.version>1.0.0</micro-common.version>
         <!-- Spring Cloud 版本号 -->
         <spring-cloud.version>Hoxton.SR11</spring-cloud.version>
         <!-- 数据库 版本号 -->
@@ -46,6 +48,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.ovo</groupId>
+                <artifactId>micro-common</artifactId>
+                <version>${micro-common.version}</version>
+            </dependency>
             <!--Spring Cloud 相关依赖-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

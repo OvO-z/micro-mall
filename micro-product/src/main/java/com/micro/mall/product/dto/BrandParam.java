@@ -9,9 +9,10 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 /**
- * @Author: QAQ
- * @Date: 2021/5/7 15:50
- * @Description: 品牌传递参数
+ * 品牌传递参数
+ * @author: QAQ
+ * @date: 2021/5/7 15:50
+ * @Description:
  */
 
 @Data

@@ -3,6 +3,7 @@ package com.micro.mall.common.api;
 /**
  * 通用返回对象封装
  * Created by QAQ on 2021/3/24
+ * @author QAQ
  */
 public class CommonResult<T> {
     private long code;
@@ -17,6 +18,19 @@ public class CommonResult<T> {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+
+    /**
+     * 验证Mybatis返回值
+     * @param count mybatis 操作行数
+     * @return
+     */
+    public static <T> CommonResult<T> validCode(int count) {
+        if (count > 0) {
+            return CommonResult.success(null);
+        } else {
+            return CommonResult.failed();
+        }
     }
 
     /**

@@ -8,16 +8,19 @@ import com.micro.mall.product.model.BrandExample;
 import com.micro.mall.product.service.BrandService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 /**
- * @Author: QAQ
- * @Date: 2021/5/7 15:39
- * @Description: 商品品牌 Service 实现类
+ * 商品品牌 Service 实现类
+ * @author QAQ
+ * @date 2021/5/7 15:39
  */
+
+@Service
 public class BrandServiceImpl implements BrandService {
 
     @Autowired
