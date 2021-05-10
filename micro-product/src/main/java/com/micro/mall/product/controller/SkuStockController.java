@@ -23,14 +23,14 @@ public class SkuStockController {
     private SkuStockService skuStockService;
 
     @ApiOperation("根据商品编号及编号模糊搜索sku库存")
-    @GetMapping(value = "/{pid}")
+    @GetMapping("/{pid}")
     @ResponseBody
     public CommonResult<List<SkuStock>> getList(@PathVariable Long pid, @RequestParam(value = "keyword",required = false) String keyword) {
         List<SkuStock> skuStocks = skuStockService.getList(pid, keyword);
         return CommonResult.success(skuStocks);
     }
     @ApiOperation("批量更新库存信息")
-    @PostMapping(value ="/batch")
+    @PostMapping("/batch")
     @ResponseBody
     public CommonResult update(@RequestBody List<SkuStock> skuStocks){
         int count = skuStockService.update(skuStocks);
