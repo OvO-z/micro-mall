@@ -7,7 +7,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="product_count" jdbcType="INTEGER" property="productCount" />
     <result column="product_unit" jdbcType="VARCHAR" property="productUnit" />
-    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -133,7 +133,7 @@
       sort, icon, create_time, 
       description)
     values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{productCount,jdbcType=INTEGER}, #{productUnit,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{productCount,jdbcType=INTEGER}, #{productUnit,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{description,jdbcType=LONGVARCHAR})
   </insert>
@@ -188,7 +188,7 @@
         #{productUnit,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=TINYINT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="sort != null">
         #{sort,jdbcType=INTEGER},
@@ -229,7 +229,7 @@
         product_unit = #{record.productUnit,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=TINYINT},
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.sort != null">
         sort = #{record.sort,jdbcType=INTEGER},
@@ -255,7 +255,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       product_count = #{record.productCount,jdbcType=INTEGER},
       product_unit = #{record.productUnit,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
       icon = #{record.icon,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -271,7 +271,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       product_count = #{record.productCount,jdbcType=INTEGER},
       product_unit = #{record.productUnit,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
       icon = #{record.icon,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
@@ -295,7 +295,7 @@
         product_unit = #{productUnit,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
@@ -318,7 +318,7 @@
       name = #{name,jdbcType=VARCHAR},
       product_count = #{productCount,jdbcType=INTEGER},
       product_unit = #{productUnit,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
       icon = #{icon,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -331,7 +331,7 @@
       name = #{name,jdbcType=VARCHAR},
       product_count = #{productCount,jdbcType=INTEGER},
       product_unit = #{productUnit,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
       icon = #{icon,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}

@@ -3,7 +3,7 @@ mybatisGenerator:
   datasource:
     type: mysql
     address: localhost:3306
-    db: mall_product?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    db: product?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
 

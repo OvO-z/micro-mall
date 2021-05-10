@@ -9,7 +9,7 @@ import lombok.Data;
  * 商品分类
  * category
  * @author 24367
- * @date 2021-05-08 13:55:11
+ * @date 2021-05-10 13:44:09
  */
 @ApiModel(value="com.micro.mall.product.model.Category")
 @Data
@@ -48,7 +48,7 @@ public class Category {
      * 状态：0->不显示；1->显示
      */
     @ApiModelProperty(value="状态：0->不显示；1->显示")
-    private Byte status;
+    private Integer status;
 
     /**
      * 排序

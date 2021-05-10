@@ -8,7 +8,7 @@ import lombok.Data;
  * 商品属性表
  * property
  * @author 24367
- * @date 2021-05-08 13:55:11
+ * @date 2021-05-10 13:44:09
  */
 @ApiModel(value="com.micro.mall.product.model.Property")
 @Data
