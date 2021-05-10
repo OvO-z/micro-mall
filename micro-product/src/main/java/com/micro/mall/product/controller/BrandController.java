@@ -23,6 +23,7 @@ import java.util.List;
 @Api(tags = "品牌管理模块")
 @RestController("/brand")
 public class BrandController {
+
     @Autowired
     private BrandService brandService;
 
