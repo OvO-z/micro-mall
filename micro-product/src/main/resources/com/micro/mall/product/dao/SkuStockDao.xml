@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.micro.mall.product.dao.SkuStockDao">
+    <insert id="batchInsert">
+        INSERT INTO sku_stock (product_id, sku_code, price, stock, low_stock, sale, sp_data) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.productId, jdbcType=BIGINT},
+             #{item.skuCode, jdbcType=VARCHAR},
+             #{item.price, jdbcType=DECIMAL},
+             #{item.stock, jdbcType=INTEGER},
+             #{item.lowStock, jdbcType=INTEGER},
+             #{item.sale, jdbcType=INTEGER},
+             #{item.spData, jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <insert id="batchReplace">
+        INSERT INTO sku_stock (id, product_id, sku_code, price, stock, low_stock, sale, sp_data) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id, jdbcType=BIGINT},
+            (#{item.productId, jdbcType=BIGINT},
+            #{item.skuCode, jdbcType=VARCHAR},
+            #{item.price, jdbcType=DECIMAL},
+            #{item.stock, jdbcType=INTEGER},
+            #{item.lowStock, jdbcType=INTEGER},
+            #{item.sale, jdbcType=INTEGER},
+            #{item.spData, jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+</mapper>
