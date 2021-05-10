@@ -7,5 +7,8 @@ package com.micro.mall.product.service;
 
 
 public interface ProductService {
+    /**
+     * 创建商品分类
+     */
 
 }
