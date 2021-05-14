@@ -9,7 +9,7 @@ import lombok.Data;
  * 商品SKU表
  * sku_stock
  * @author 24367
- * @date 2021-05-10 13:44:09
+ * @date 2021-05-14 15:31:23
  */
 @ApiModel(value="com.micro.mall.product.model.SkuStock")
 @Data

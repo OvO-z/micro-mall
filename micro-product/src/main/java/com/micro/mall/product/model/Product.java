@@ -10,7 +10,7 @@ import lombok.Data;
  * 商品基础信息表
  * product
  * @author 24367
- * @date 2021-05-10 13:44:09
+ * @date 2021-05-14 15:31:23
  */
 @ApiModel(value="com.micro.mall.product.model.Product")
 @Data
@@ -31,7 +31,7 @@ public class Product {
      * 分类ID(外键)
      */
     @ApiModelProperty(value="分类ID(外键)")
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 分类名称
@@ -43,7 +43,7 @@ public class Product {
      * 品牌ID(外键)
      */
     @ApiModelProperty(value="品牌ID(外键)")
-    private Integer brandId;
+    private Long brandId;
 
     /**
      * 品牌名称
