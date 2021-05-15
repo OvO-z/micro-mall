@@ -6,21 +6,20 @@ import com.micro.mall.product.dao.SkuStockDao;
 import com.micro.mall.product.dto.ProductParam;
 import com.micro.mall.product.dto.ProductQueryParam;
 import com.micro.mall.product.mapper.ProductMapper;
-import com.micro.mall.product.model.Product;
-import com.micro.mall.product.model.ProductExample;
-import com.micro.mall.product.model.SkuStock;
+import com.micro.mall.product.mapper.ProductPropertyValueMapper;
+import com.micro.mall.product.mapper.SkuStockMapper;
+import com.micro.mall.product.model.*;
 import com.micro.mall.product.service.ProductService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
-import javax.sound.sampled.Port;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
@@ -37,9 +36,13 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
     @Autowired
+    private SkuStockMapper skuStockMapper;
+    @Autowired
     private SkuStockDao skuStockDao;
     @Autowired
     private ProductPropertyValueDao productPropertyValueDao;
+    @Autowired
+    private ProductPropertyValueMapper productPropertyValueMapper;
 
 
     @Override
@@ -67,8 +70,14 @@ public class ProductServiceImpl implements ProductService {
         product.setId(id);
         productMapper.updateByPrimaryKeySelective(product);
         // 修改SKU编码
-//        handleSkuStockCode(id, param); TODO
-        return 0;
+        handleUpdateSkuStockList(id, param);
+        // 修改商品参数
+        ProductPropertyValueExample example = new ProductPropertyValueExample();
+        example.createCriteria().andProductIdEqualTo(id);
+        productPropertyValueMapper.deleteByExample(example);
+        relateAndInsert(productPropertyValueDao, param.getProductPropertyValues(), id);
+        count = 1;
+        return count;
 //
     }
 
@@ -129,7 +138,45 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void handleUpdateSkuStockList(Long id, ProductParam param) {
+        // 当前的SKU信息
+        List<SkuStock> list = param.getSkuStocks();
+        SkuStockExample example = new SkuStockExample();
+        example.createCriteria().andProductIdEqualTo(id);
+        // 当前没有SKU直接删除
+        if(CollectionUtils.isEmpty(list)) {
+            skuStockMapper.deleteByExample(example);
+            return;
+        }
+        // 获取初始SKU信息
+        List<SkuStock> originList = skuStockMapper.selectByExample(example);
+        // 获取新增SKU信息
+        List<SkuStock> insertList = list.stream().filter(item -> item.getId() == null).collect(Collectors.toList());
+        // 获取需要更新的SKU信息
+        List<SkuStock> updateList = list.stream().filter(item -> item.getId() != null).collect(Collectors.toList());
+        List<Long> updateSkuIds = updateList.stream().map(SkuStock::getId).collect(Collectors.toList());
+        // 获取需要删除的SKU信息
+        List<SkuStock> removeList = list.stream().filter(item -> !updateSkuIds.contains(item.getId())).collect(Collectors.toList());
 
+        handleSkuStockCode(insertList, id);
+        handleSkuStockCode(updateList, id);
+
+        // 新增SKU
+        if (!CollectionUtils.isEmpty(insertList)) {
+            relateAndInsert(skuStockDao, insertList, id);
+        }
+        // 删除SKU
+        if (!CollectionUtils.isEmpty(removeList)) {
+            List<Long> removeSkuIds = removeList.stream().map(SkuStock::getId).collect(Collectors.toList());
+            SkuStockExample removeExample = new SkuStockExample();
+            removeExample.createCriteria().andIdIn(removeSkuIds);
+            skuStockMapper.deleteByExample(removeExample);
+        }
+        // 修改SKU
+        if (!CollectionUtils.isEmpty(updateList)) {
+            for (SkuStock skuStock: updateList) {
+                skuStockMapper.updateByPrimaryKeySelective(skuStock);
+            }
+        }
     }
 
     private void relateAndInsert(Object dao, List data, Long productId) {
