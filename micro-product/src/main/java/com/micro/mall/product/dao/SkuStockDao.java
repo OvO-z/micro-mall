@@ -1,6 +1,7 @@
 package com.micro.mall.product.dao;
 
 import com.micro.mall.product.model.SkuStock;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @date 2021/5/10
  */
 
+@Mapper
 public interface SkuStockDao {
     /**
      * 批量插入操作

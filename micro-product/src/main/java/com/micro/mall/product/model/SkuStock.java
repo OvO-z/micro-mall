@@ -2,6 +2,7 @@ package com.micro.mall.product.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.Data;
 
@@ -9,11 +10,11 @@ import lombok.Data;
  * 商品SKU表
  * sku_stock
  * @author 24367
- * @date 2021-05-14 15:31:23
+ * @date 2021-05-15 14:41:02
  */
 @ApiModel(value="com.micro.mall.product.model.SkuStock")
 @Data
-public class SkuStock {
+public class SkuStock implements Serializable {
     /**
      * 主键（自增ID）
      */
@@ -61,4 +62,6 @@ public class SkuStock {
      */
     @ApiModelProperty(value="商品属性组合，json格式")
     private String spData;
+
+    private static final long serialVersionUID = 1L;
 }

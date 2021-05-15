@@ -21,7 +21,8 @@ import java.util.List;
  */
 
 @Api(tags = "品牌管理模块")
-@RestController("/brand")
+@RestController
+@RequestMapping("/brand")
 public class BrandController {
 
     @Autowired

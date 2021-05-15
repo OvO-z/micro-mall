@@ -2,17 +2,18 @@ package com.micro.mall.product.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 import lombok.Data;
 
 /**
  * 商品属性值表
  * product_property_value
  * @author 24367
- * @date 2021-05-14 15:31:23
+ * @date 2021-05-15 14:41:02
  */
 @ApiModel(value="com.micro.mall.product.model.ProductPropertyValue")
 @Data
-public class ProductPropertyValue {
+public class ProductPropertyValue implements Serializable {
     /**
      * 自增ID
      */
@@ -36,4 +37,6 @@ public class ProductPropertyValue {
      */
     @ApiModelProperty(value="商品属性值")
     private String value;
+
+    private static final long serialVersionUID = 1L;
 }

@@ -3,8 +3,10 @@ package com.micro.mall.product.mapper;
 import com.micro.mall.product.model.Brand;
 import com.micro.mall.product.model.BrandExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface BrandMapper {
     long countByExample(BrandExample example);
 

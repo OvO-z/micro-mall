@@ -17,7 +17,8 @@ import java.util.List;
  */
 
 @Api("sku商品库存管理")
-@RestController("/sku")
+@RestController
+@RequestMapping("/sku")
 public class SkuStockController {
     @Autowired
     private SkuStockService skuStockService;

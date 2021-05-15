@@ -18,7 +18,8 @@ import java.util.List;
  */
 
 @Api("商品类型管理")
-@RestController("/type")
+@RestController
+@RequestMapping("/type")
 public class TypeController {
 
     @Autowired

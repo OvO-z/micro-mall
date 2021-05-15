@@ -3,8 +3,10 @@ package com.micro.mall.product.mapper;
 import com.micro.mall.product.model.Product;
 import com.micro.mall.product.model.ProductExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ProductMapper {
     long countByExample(ProductExample example);
 

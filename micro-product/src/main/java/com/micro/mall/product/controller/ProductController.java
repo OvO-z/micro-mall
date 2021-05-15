@@ -22,7 +22,8 @@ import java.util.List;
  */
 
 @Api(tags = "商品管理模块")
-@RestController("/product")
+@RestController
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     ProductService productService;

@@ -19,7 +19,8 @@ import java.util.List;
  * @date 2021/5/11
  */
 @Api("商品属性管理")
-@RestController("/property")
+@RestController
+@RequestMapping("/property")
 public class PropertyController {
     @Autowired
     private PropertyService propertyService;

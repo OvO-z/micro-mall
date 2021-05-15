@@ -3,8 +3,10 @@ package com.micro.mall.product.mapper;
 import com.micro.mall.product.model.SkuStock;
 import com.micro.mall.product.model.SkuStockExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface SkuStockMapper {
     long countByExample(SkuStockExample example);
 

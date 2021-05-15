@@ -22,8 +22,8 @@ mybatisGenerator:
     comment: true
     lombok: true
     swagger: true
-    mapperAnnotation: false
-    serializable: false
+    mapperAnnotation: true
+    serializable: true
 
   # 需要生成的表
   tables:

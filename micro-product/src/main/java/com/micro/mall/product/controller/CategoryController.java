@@ -21,7 +21,8 @@ import java.util.List;
  */
 
 @Api("商品分类管理")
-@RestController("/category")
+@RestController
+@RequestMapping("/category")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -43,7 +44,7 @@ public class CategoryController {
     }
 
     @ApiOperation("分页查询商品分类")
-    @GetMapping(value = "/list/{parentId}")
+    @GetMapping("/list/{parentId}")
     @ResponseBody
     public CommonResult<CommonPage<Category>> getList(@PathVariable Long parentId,
                                                       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
@@ -53,7 +54,7 @@ public class CategoryController {
     }
 
     @ApiOperation("根据id获取商品分类")
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     public CommonResult<Category> getItem(@PathVariable Long id) {
         Category category = categoryService.getItem(id);

@@ -3,8 +3,10 @@ package com.micro.mall.product.mapper;
 import com.micro.mall.product.model.ProductPropertyValue;
 import com.micro.mall.product.model.ProductPropertyValueExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ProductPropertyValueMapper {
     long countByExample(ProductPropertyValueExample example);
 
