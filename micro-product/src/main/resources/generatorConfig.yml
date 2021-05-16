@@ -9,8 +9,8 @@ mybatisGenerator:
 
   targetPackage:
     ## 生成 domain 和 mapper 路径
-    model: com.micro.mall.product.model
-    mapper: com.micro.mall.product.mapper
+    model: com.micro.mall.model
+    mapper: com.micro.mall.mapper
     javaXmlFilesSamePackage: false
 
   targetRuntime: MyBatis3

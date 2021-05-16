@@ -1,5 +1,7 @@
 package com.micro.mall.common.api;
 
+import java.util.List;
+
 /**
  * 通用返回对象封装
  * Created by QAQ on 2021/3/24
@@ -95,8 +97,8 @@ public class CommonResult<T> {
      * 参数验证失败返回结果
      * @param message 提示信息
      */
-    public static <T> CommonResult<T> validateFailed(String message) {
-        return new CommonResult<T>(ResultCode.VALIDATE_FAILED.getCode(), message, null);
+    public static <T> CommonResult<T> validateFailed(T data) {
+        return new CommonResult<T>(ResultCode.VALIDATE_FAILED.getCode(), ResultCode.VALIDATE_FAILED.getMessage(), data);
     }
 
     /**
