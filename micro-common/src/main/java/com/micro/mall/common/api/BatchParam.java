@@ -4,6 +4,7 @@ import com.micro.mall.common.validator.BatchMethod;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
@@ -17,6 +18,8 @@ import java.util.List;
 public class BatchParam<T> {
 
     @ApiModelProperty(value = "ID列表", required = true)
+    @NotEmpty(message = "ID不能为空")
+    @Valid
     private List<Long> ids;
 
     @ApiModelProperty(value = "更新数据")

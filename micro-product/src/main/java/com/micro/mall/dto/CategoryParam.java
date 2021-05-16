@@ -18,14 +18,14 @@ import javax.validation.constraints.NotEmpty;
 public class CategoryParam {
     @ApiModelProperty("父级分类编号")
     private Long parentId;
-    @NotEmpty
+    @NotEmpty(message = "商品分类名称不为空")
     @ApiModelProperty(value = "商品分类名称", required = true)
     private String name;
     @ApiModelProperty("分类单位")
     private String productUnit;
     @ApiModelProperty("是否进行显示")
     private Integer status;
-    @Min(value = 0)
+    @Min(value = 0, message = "序列最小为0")
     @ApiModelProperty("排序")
     private Integer sort;
     @ApiModelProperty("图标")

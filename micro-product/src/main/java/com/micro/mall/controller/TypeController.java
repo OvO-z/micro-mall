@@ -6,9 +6,11 @@ import com.micro.mall.model.Type;
 import com.micro.mall.service.TypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
@@ -28,7 +30,7 @@ public class TypeController {
     @ApiOperation("添加商品分类")
     @PostMapping
     @ResponseBody
-    public CommonResult create(@RequestParam String name) {
+    public CommonResult create(@RequestParam @NotEmpty(message = "分类名称不能为空") @ApiParam(required = true) String name) {
         int count = typeService.create(name);
         return CommonResult.validCode(count);
     }

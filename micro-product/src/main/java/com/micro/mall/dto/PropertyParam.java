@@ -17,10 +17,10 @@ import javax.validation.constraints.NotEmpty;
 @EqualsAndHashCode
 public class PropertyParam {
 
-    @NotEmpty
-    @ApiModelProperty("商品类型ID")
+    @NotEmpty(message = "商品类型ID不能为空")
+    @ApiModelProperty(value = "商品类型ID", required = true)
     private Long typeId;
-    @NotEmpty
+    @NotEmpty(message = "属性名称不能为空")
     @ApiModelProperty("属性名称")
     private String name;
     @ApiModelProperty("属性值")

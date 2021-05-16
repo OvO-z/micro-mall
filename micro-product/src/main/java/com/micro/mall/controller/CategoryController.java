@@ -10,6 +10,7 @@ import com.micro.mall.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class CategoryController {
     @ApiOperation("添加商品分类")
     @PostMapping
     @ResponseBody
-    public CommonResult create(@RequestBody CategoryParam param) {
+    public CommonResult create(@RequestBody @Validated CategoryParam param) {
         int count = categoryService.create(param);
         return CommonResult.validCode(count);
     }
@@ -38,7 +39,7 @@ public class CategoryController {
     @ApiOperation("更新商品分类")
     @PutMapping("/{id}")
     @ResponseBody
-    public CommonResult update(@PathVariable("id") Long id, @RequestBody CategoryParam param) {
+    public CommonResult update(@PathVariable("id") Long id, @RequestBody @Validated CategoryParam param) {
         int count = categoryService.update(id, param);
         return CommonResult.validCode(count);
     }

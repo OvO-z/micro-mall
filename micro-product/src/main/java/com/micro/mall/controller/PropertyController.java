@@ -9,6 +9,7 @@ import com.micro.mall.service.PropertyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,7 +27,7 @@ public class PropertyController {
     @ApiOperation("添加商品属性信息")
     @PostMapping
     @ResponseBody
-    public CommonResult create(@RequestBody PropertyParam param) {
+    public CommonResult create(@RequestBody @Validated PropertyParam param) {
         int count = propertyService.create(param);
         return CommonResult.validCode(count);
     }
@@ -34,7 +35,7 @@ public class PropertyController {
     @ApiOperation("修改商品属性信息")
     @PutMapping("/{id}")
     @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody PropertyParam param) {
+    public CommonResult update(@PathVariable Long id, @RequestBody @Validated PropertyParam param) {
         int count = propertyService.update(id, param);
         return CommonResult.validCode(count);
     }
