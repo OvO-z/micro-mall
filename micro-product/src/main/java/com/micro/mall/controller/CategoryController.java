@@ -21,7 +21,7 @@ import java.util.List;
  * @date 2021/5/10
  */
 
-@Api("商品分类管理")
+@Api(tags = "商品分类管理")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {

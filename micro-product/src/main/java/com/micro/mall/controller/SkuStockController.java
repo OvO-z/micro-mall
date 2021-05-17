@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2021/5/10
  */
 
-@Api("sku商品库存管理")
+@Api(tags = "sku商品库存管理")
 @RestController
 @RequestMapping("/sku")
 public class SkuStockController {

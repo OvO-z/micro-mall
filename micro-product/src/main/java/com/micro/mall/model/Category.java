@@ -10,9 +10,8 @@ import lombok.Data;
  * 商品分类
  * category
  * @author 24367
- * @date 2021-05-15 14:41:02
+ * @date 2021-05-17 14:29:33
  */
-@ApiModel(value="com.micro.mall.product.model.Category")
 @Data
 public class Category implements Serializable {
     /**

@@ -2,7 +2,6 @@ package com.micro.mall.mapper;
 
 import com.micro.mall.model.Product;
 import com.micro.mall.model.ProductExample;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

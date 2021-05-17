@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2021/5/10
  */
 
-@Api("商品类型管理")
+@Api(tags = "商品类型管理")
 @RestController
 @RequestMapping("/type")
 public class TypeController {

@@ -9,9 +9,8 @@ import lombok.Data;
  * 商品属性表
  * property
  * @author 24367
- * @date 2021-05-15 14:41:02
+ * @date 2021-05-17 14:29:33
  */
-@ApiModel(value="com.micro.mall.product.model.Property")
 @Data
 public class Property implements Serializable {
     /**

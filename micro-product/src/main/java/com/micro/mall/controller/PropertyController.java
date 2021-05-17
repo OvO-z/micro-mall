@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author QAQ
  * @date 2021/5/11
  */
-@Api("商品属性管理")
+@Api(tags = "商品属性管理")
 @RestController
 @RequestMapping("/property")
 public class PropertyController {
