@@ -1,6 +1,6 @@
 # Project exclude paths
-/micro-product/target/
+target/
 
-/.idea
+.idea/
 
 *.iml
