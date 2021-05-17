@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 80011
  Source Host           : localhost:3306
- Source Schema         : mall_product
+ Source Schema         : product
 
  Target Server Type    : MySQL
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 07/05/2021 17:10:26
+ Date: 17/05/2021 15:00:12
 */
 
 SET NAMES utf8mb4;
@@ -24,14 +24,29 @@ DROP TABLE IF EXISTS `brand`;
 CREATE TABLE `brand`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键（自增ID）',
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '名称',
-  `web` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '品牌网站',
+  `web` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '品牌网站',
   `sort` int(11) DEFAULT NULL COMMENT '品牌序列',
   `status` int(1) NOT NULL DEFAULT 1 COMMENT '品牌状态：1- 可用， 0为不可用 ',
   `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   `first_word` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '品牌首字母',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品品牌\r\n' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品品牌\r\n' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of brand
+-- ----------------------------
+INSERT INTO `brand` VALUES (1, '万和', NULL, NULL, 1, NULL, '2021-05-16 13:56:29', 'W');
+INSERT INTO `brand` VALUES (2, '三星', NULL, NULL, 1, NULL, '2021-05-16 13:50:23', 'S');
+INSERT INTO `brand` VALUES (3, '华为', NULL, NULL, 1, NULL, '2021-05-16 13:50:34', 'H');
+INSERT INTO `brand` VALUES (4, '格力', NULL, NULL, 1, NULL, '2021-05-16 13:50:45', 'G');
+INSERT INTO `brand` VALUES (5, '方太', NULL, NULL, 1, NULL, '2021-05-16 13:50:55', 'F');
+INSERT INTO `brand` VALUES (6, '小米', NULL, NULL, 1, NULL, '2021-05-16 13:51:10', 'M');
+INSERT INTO `brand` VALUES (7, 'OPPO', NULL, NULL, 1, NULL, '2021-05-16 13:51:23', 'O');
+INSERT INTO `brand` VALUES (8, '七匹狼', NULL, NULL, 1, NULL, '2021-05-16 13:51:36', 'S');
+INSERT INTO `brand` VALUES (9, '海澜之家', NULL, NULL, 1, NULL, '2021-05-16 13:51:45', 'H');
+INSERT INTO `brand` VALUES (10, '苹果', NULL, NULL, 1, NULL, '2021-05-16 13:51:53', 'A');
+INSERT INTO `brand` VALUES (11, 'NIKE', NULL, NULL, 1, NULL, '2021-05-16 13:52:05', 'N');
 
 -- ----------------------------
 -- Table structure for category
@@ -43,13 +58,13 @@ CREATE TABLE `category`  (
   `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '名称',
   `product_count` int(11) DEFAULT NULL COMMENT '商品数量',
   `product_unit` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品单位',
-  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态：0->不显示；1->显示',
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '状态：0->不显示；1->显示',
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图标',
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT '描述',
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品分类' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品分类' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
@@ -96,9 +111,9 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键(自增ID)',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '商品名称',
-  `category_id` int(11) DEFAULT NULL COMMENT '分类ID(外键)',
+  `category_id` bigint(20) DEFAULT NULL COMMENT '分类ID(外键)',
   `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '分类名称',
-  `brand_id` int(11) DEFAULT NULL COMMENT '品牌ID(外键)',
+  `brand_id` bigint(20) DEFAULT NULL COMMENT '品牌ID(外键)',
   `brand_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '品牌名称',
   `pic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图片',
   `price` decimal(12, 2) DEFAULT NULL COMMENT '价格',
@@ -112,7 +127,7 @@ CREATE TABLE `product`  (
   `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品基础信息表\r\n' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品基础信息表\r\n' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product_property_value
@@ -136,7 +151,7 @@ CREATE TABLE `property`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '属性名称',
   `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '属性值',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品属性表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品属性表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sku_stock
@@ -163,6 +178,17 @@ CREATE TABLE `type`  (
   `type_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '商品类型名称',
   `description` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品描述',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品类型表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品类型表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of type
+-- ----------------------------
+INSERT INTO `type` VALUES (1, '服装-T恤', NULL);
+INSERT INTO `type` VALUES (2, '服装-裤装', NULL);
+INSERT INTO `type` VALUES (3, '手机数码-手机通讯', NULL);
+INSERT INTO `type` VALUES (4, '配件', NULL);
+INSERT INTO `type` VALUES (5, '居家', NULL);
+INSERT INTO `type` VALUES (6, '洗护', NULL);
+INSERT INTO `type` VALUES (7, '服装-鞋帽', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
