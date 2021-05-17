@@ -13,6 +13,7 @@
         <module>micro-product</module>
         <module>micro-common</module>
         <module>micro-gateway</module>
+        <module>micro-user</module>
     </modules>
 
     <parent>
