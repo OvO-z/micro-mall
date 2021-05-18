@@ -27,3 +27,11 @@ mybatisGenerator:
 
   # 需要生成的表
   tables:
+    - user
+    - role
+    - resource
+    - menu
+    - resource_category
+    - user_role_relation
+    - role_menu_relation
+    - role_resource_relation
