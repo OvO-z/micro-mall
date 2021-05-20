@@ -8,9 +8,9 @@ import lombok.Data;
 /**
  * resource
  * @author 24367
- * @date 2021-05-18 15:00:35
+ * @date 2021-05-20 16:12:16
  */
-
+@ApiModel(value="com.micro.mall.model.Resource")
 @Data
 public class Resource implements Serializable {
     /**
@@ -41,7 +41,7 @@ public class Resource implements Serializable {
      * 资源分类ID
      */
     @ApiModelProperty(value="资源分类ID")
-    private Integer categoryId;
+    private Long categoryId;
 
     private static final long serialVersionUID = 1L;
 }

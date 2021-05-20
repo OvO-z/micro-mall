@@ -9,9 +9,9 @@ import lombok.Data;
  * 后台角色资源关系表
  * role_resource_relation
  * @author 24367
- * @date 2021-05-18 15:00:35
+ * @date 2021-05-20 16:12:16
  */
-
+@ApiModel(value="com.micro.mall.model.RoleResourceRelation")
 @Data
 public class RoleResourceRelation implements Serializable {
     /**

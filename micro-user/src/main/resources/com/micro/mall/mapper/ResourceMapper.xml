@@ -6,7 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -103,7 +103,7 @@
     insert into resource (id, name, url, 
       description, category_id)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER})
+      #{description,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.micro.mall.model.Resource">
     insert into resource
@@ -138,7 +138,7 @@
         #{description,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null">
-        #{categoryId,jdbcType=INTEGER},
+        #{categoryId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -164,7 +164,7 @@
         description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.categoryId != null">
-        category_id = #{record.categoryId,jdbcType=INTEGER},
+        category_id = #{record.categoryId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -177,7 +177,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      category_id = #{record.categoryId,jdbcType=INTEGER}
+      category_id = #{record.categoryId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -195,7 +195,7 @@
         description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null">
-        category_id = #{categoryId,jdbcType=INTEGER},
+        category_id = #{categoryId,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -205,7 +205,7 @@
     set name = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=INTEGER}
+      category_id = #{categoryId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
