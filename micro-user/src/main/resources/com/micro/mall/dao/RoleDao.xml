@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.micro.mall.dao.RoleDao">
+  <select id="getMenus" resultType="com.micro.mall.model.Menu">
+    SELECT
+           menu.id AS id,
+           menu.parentId AS parentId,
+           menu.title AS title,
+           menu.level AS level,
+           menu.sort AS sort,
+           menu.name AS name,
+           menu.hidden AS hidden,
+           menu.icon AS icon,
+    FROM
+        user_role_relation AS urr
+        LEFT JOIN `role` AS r ON urr.role_id = r.id
+        LEFT JOIN role_menu_relation AS rmr ON rmr.role_id = r.id
+        LEFT JOIN menu ON rmr.menu_id = menu.id
+    WHERE
+        urr.user_id = #{userId}
+        AND menu.id IS NOT NULL
+    GROUP BY
+        menu.id
+  </select>
+    <select id="getMenuByRoleId" resultType="com.micro.mall.model.Menu">
+        SELECT
+            menu.id AS id,
+            menu.parentId AS parentId,
+            menu.title AS title,
+            menu.level AS level,
+            menu.sort AS sort,
+            menu.name AS name,
+            menu.hidden AS hidden,
+            menu.icon AS icon,
+        FROM
+            role_menu_relation rmr
+                LEFT JOIN menu ON rmr.menu_id = menu.id
+        WHERE
+            rmr.role_id = #{roleId}
+          AND menu.id IS NOT NULL
+        GROUP BY
+            menu.id
+    </select>
+    <select id="getResourceByRoleId" resultType="com.micro.mall.model.Resource">
+        SELECT
+            resource.id AS id,
+            resource.`name` AS `name`,
+            resource.url AS url,
+            resource.description AS description,
+            resource.category_id AS categoryId
+        FROM
+            role_resource_relation rrr
+                LEFT JOIN resource ON rrr.resource_id = resource.id
+        WHERE
+            rrr.role_id = #{roleId}
+          AND resource.id IS NOT NULL
+        GROUP BY
+            resource.id
+    </select>
+</mapper>

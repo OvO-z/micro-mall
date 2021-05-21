@@ -1,6 +1,7 @@
 package com.micro.mall.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.micro.mall.dao.RoleDao;
 import com.micro.mall.mapper.RoleMapper;
 import com.micro.mall.mapper.RoleMenuRelationMapper;
 import com.micro.mall.mapper.RoleResourceRelationMapper;
@@ -25,6 +26,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMapper roleMapper;
+
+    @Autowired
+    private RoleDao roleDao;
 
     @Autowired
     private RoleMenuRelationMapper roleMenuRelationMapper;
@@ -70,20 +74,17 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Menu> getMenus(Long userId) {
-        // TODO
-        return null;
+        return roleDao.getMenus(userId);
     }
 
     @Override
     public List<Menu> listMenu(Long roleId) {
-        // TODO
-        return null;
+        return roleDao.getMenuByRoleId(roleId);
     }
 
     @Override
     public List<Resource> listResource(Long roleId) {
-        // TODO
-        return null;
+        return roleDao.getResourceByRoleId(roleId);
     }
 
     @Override

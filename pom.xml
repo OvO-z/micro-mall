@@ -39,12 +39,17 @@
         <druid-starter.version>1.2.5</druid-starter.version>
         <!-- 工具包 版本号 -->
         <knife4j.version>3.0.2</knife4j.version>
+        <hutool.version>5.4.0</hutool.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
 
@@ -94,7 +99,12 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-starter.version}</version>
             </dependency>
-
+            <!--Hutool Java工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
             <!--Knife4j API文档生产工具-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
