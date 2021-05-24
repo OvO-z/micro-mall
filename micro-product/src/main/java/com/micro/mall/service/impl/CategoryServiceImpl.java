@@ -3,8 +3,11 @@ package com.micro.mall.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.micro.mall.dto.CategoryParam;
 import com.micro.mall.mapper.CategoryMapper;
+import com.micro.mall.mapper.ProductMapper;
 import com.micro.mall.model.Category;
 import com.micro.mall.model.CategoryExample;
+import com.micro.mall.model.Product;
+import com.micro.mall.model.ProductExample;
 import com.micro.mall.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
+    @Autowired
+    private ProductMapper productMapper;
+
 
     @Override
     public int create(CategoryParam param) {
@@ -35,8 +41,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public int update(Long id, CategoryParam param) {
-        // TODO 更新商品分类
-        return 0;
+        Category category = new Category();
+        category.setId(id);
+        BeanUtils.copyProperties(param, category);
+        Product product = new Product();
+        product.setCategoryName(category.getName());
+        ProductExample example = new ProductExample();
+        example.createCriteria().andCategoryIdEqualTo(id);
+        productMapper.updateByExampleSelective(product, example);
+        return categoryMapper.updateByPrimaryKeySelective(category);
     }
 
     @Override

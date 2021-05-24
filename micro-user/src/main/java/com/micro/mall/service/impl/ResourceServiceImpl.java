@@ -1,6 +1,5 @@
 package com.micro.mall.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.micro.mall.mapper.ResourceMapper;
 import com.micro.mall.model.Resource;

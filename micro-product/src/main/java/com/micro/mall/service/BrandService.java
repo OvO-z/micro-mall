@@ -2,6 +2,7 @@ package com.micro.mall.service;
 
 import com.micro.mall.dto.BrandParam;
 import com.micro.mall.model.Brand;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public interface BrandService {
     /**
      * 修改品牌
      */
+    @Transactional
     int updateBrand(Long id, BrandParam param);
 
     /**

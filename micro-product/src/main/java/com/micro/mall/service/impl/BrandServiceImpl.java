@@ -3,8 +3,11 @@ package com.micro.mall.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.micro.mall.dto.BrandParam;
 import com.micro.mall.mapper.BrandMapper;
+import com.micro.mall.mapper.ProductMapper;
 import com.micro.mall.model.Brand;
 import com.micro.mall.model.BrandExample;
+import com.micro.mall.model.Product;
+import com.micro.mall.model.ProductExample;
 import com.micro.mall.service.BrandService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,8 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private BrandMapper brandMapper;
+    @Autowired
+    private ProductMapper productMapper;
 
     @Override
     public List<Brand> listAllBrand() {
@@ -51,7 +56,12 @@ public class BrandServiceImpl implements BrandService {
         if (isEmpty(brand.getFirstWord())) {
             brand.setFirstWord(brand.getName().substring(0, 1));
         }
-        // TODO 更新商品中的品牌名
+        // 更新商品中的品牌名
+        Product product = new Product();
+        product.setBrandName(brand.getName());
+        ProductExample example = new ProductExample();
+        example.createCriteria().andBrandIdEqualTo(id);
+        productMapper.updateByExampleSelective(product, example);
         return brandMapper.updateByPrimaryKey(brand);
     }
 

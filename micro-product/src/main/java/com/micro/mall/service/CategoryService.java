@@ -2,6 +2,7 @@ package com.micro.mall.service;
 
 import com.micro.mall.dto.CategoryParam;
 import com.micro.mall.model.Category;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public interface CategoryService {
     /**
      * 修改商品分类
      */
+    @Transactional
     int update(Long id, CategoryParam param);
 
 
