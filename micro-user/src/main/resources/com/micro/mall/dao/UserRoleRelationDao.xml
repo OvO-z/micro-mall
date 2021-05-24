@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.micro.mall.dao.UserRoleRelationDao">
+    <insert id="batchInsert">
+        INSERT INTO user_role_relation (user_id, role_id) VALUES
+        <foreach collection="list" separator="," item="item" index="index">
+            (
+             #{item.userId, jdbcType=BIGINT},
+             #{item.roleId, jdbcType=BIGINT}
+            )
+        </foreach>
+    </insert>
+    <select id="getRoles" resultMap="com.micro.mall.mapper.RoleMapper.BaseResultMap">
+        SELECT r.*
+        FROM user_role_relation urr LEFT JOIN `role` r ON urr.role_id = r.id
+        WHERE urr.user_id = #{userId}
+    </select>
+    <select id="getResources" resultType="com.micro.mall.model.Resource">
+        SELECT
+            resource.id id,
+            resource.`name` `name`,
+            resource.url url,
+            resource.description description,
+            resource.category_id categoryId
+        FROM
+            user_role_relation urr
+                LEFT JOIN `role` r ON ar.role_id = r.id
+                LEFT JOIN role_resource_relation rrr ON r.id = rrr.role_id
+                LEFT JOIN resource ON resource.id = rrr.resource_id
+        WHERE
+            urr.admin_id = #{userId}
+          AND resource.id IS NOT NULL
+        GROUP BY
+            resource.id
+    </select>
+    <select id="getUserIds" resultType="java.lang.Long">
+        SELECT
+            DISTINCT  urr.user_id
+        FROM
+            role_resource_relation rrr LEFT JOIN user_role_relation urr ON rrr.role_id = urr.role_id
+        WHERE rrr.resource_id = #{resourceId}
+    </select>
+</mapper>

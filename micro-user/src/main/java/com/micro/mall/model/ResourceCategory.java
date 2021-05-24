@@ -10,7 +10,7 @@ import lombok.Data;
  * 资源分类表
  * resource_category
  * @author 24367
- * @date 2021-05-20 16:12:16
+ * @date 2021-05-24 17:25:02
  */
 @ApiModel(value="com.micro.mall.model.ResourceCategory")
 @Data

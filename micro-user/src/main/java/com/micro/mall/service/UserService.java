@@ -5,6 +5,7 @@ import com.micro.mall.common.domain.UserDto;
 import com.micro.mall.dto.UserParam;
 import com.micro.mall.dto.UserPasswordParam;
 import com.micro.mall.model.Resource;
+import com.micro.mall.model.Role;
 import com.micro.mall.model.User;
 
 import java.util.List;
@@ -53,8 +54,9 @@ public interface UserService {
      */
     int updateRole(Long userId, List<Long> roleIds);
 
+    List<Role> getRoles(Long userId);
     /**
-     * 获取用户对应角色
+     * 获取用户可访问资源
      */
     List<Resource> getResources(Long userId);
 

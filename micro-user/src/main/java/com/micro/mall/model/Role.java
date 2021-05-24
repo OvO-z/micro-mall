@@ -9,7 +9,7 @@ import lombok.Data;
 /**
  * role
  * @author 24367
- * @date 2021-05-20 16:12:16
+ * @date 2021-05-24 17:25:02
  */
 @ApiModel(value="com.micro.mall.model.Role")
 @Data
@@ -47,7 +47,8 @@ public class Role implements Serializable {
     /**
      * 排序
      */
-    @ApiModelProperty(value="排序")
+    @ApiModelProperty(value="排序
+")
     private Integer sort;
 
     /**

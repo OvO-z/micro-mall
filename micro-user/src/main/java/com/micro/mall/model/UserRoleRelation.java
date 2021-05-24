@@ -9,7 +9,7 @@ import lombok.Data;
  * 后台用户和角色关系表
  * user_role_relation
  * @author 24367
- * @date 2021-05-20 16:12:16
+ * @date 2021-05-24 17:25:02
  */
 @ApiModel(value="com.micro.mall.model.UserRoleRelation")
 @Data
@@ -22,7 +22,7 @@ public class UserRoleRelation implements Serializable {
     /**
      */
     @ApiModelProperty(value="")
-    private Long adminId;
+    private Long userId;
 
     /**
      */

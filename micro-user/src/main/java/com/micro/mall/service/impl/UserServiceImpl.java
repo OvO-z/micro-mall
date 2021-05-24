@@ -1,26 +1,31 @@
 package com.micro.mall.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import com.github.pagehelper.PageHelper;
 import com.micro.mall.common.api.CommonResult;
 import com.micro.mall.common.domain.UserDto;
 import com.micro.mall.common.exception.Asserts;
+import com.micro.mall.dao.UserRoleRelationDao;
 import com.micro.mall.dto.UserParam;
 import com.micro.mall.dto.UserPasswordParam;
 import com.micro.mall.mapper.UserMapper;
-import com.micro.mall.model.Resource;
-import com.micro.mall.model.User;
-import com.micro.mall.model.UserExample;
+import com.micro.mall.mapper.UserRoleRelationMapper;
+import com.micro.mall.model.*;
 import com.micro.mall.service.UserCacheService;
 import com.micro.mall.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
@@ -36,8 +41,15 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
     @Autowired
     private UserCacheService userCacheService;
+
+    @Autowired
+    private UserRoleRelationDao userRoleRelationDao;
+
+    @Autowired
+    private UserRoleRelationMapper userRoleRelationMapper;
 
     @Override
     public User getUserByUsername(String username) {
@@ -124,12 +136,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateRole(Long userId, List<Long> roleIds) {
-        return 0;
+        int count = roleIds == null ? 0 : roleIds.size();
+        UserRoleRelationExample example = new UserRoleRelationExample();
+        example.createCriteria().andUserIdEqualTo(userId);
+        userRoleRelationMapper.deleteByExample(example);
+        if (CollUtil.isNotEmpty(roleIds)) {
+            List<UserRoleRelation> list = new ArrayList<>();
+            roleIds.stream().forEach(roleId -> {
+                UserRoleRelation relation = new UserRoleRelation();
+                relation.setUserId(userId);
+                relation.setRoleId(roleId);
+                list.add(relation);
+            });
+            userRoleRelationDao.batchInsert(list);
+        }
+        return count;
+    }
+
+    @Override
+    public List<Role> getRoles(Long userId) {
+        return userRoleRelationDao.getRoles(userId);
     }
 
     @Override
     public List<Resource> getResources(Long userId) {
-        return null;
+        return userRoleRelationDao.getResources(userId);
     }
 
     @Override
@@ -139,11 +170,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto loadByUsername(String username) {
+        //获取用户信息
+        User user = getUserByUsername(username);
+        if (user != null) {
+            List<Role> roles = getRoles(user.getId());
+            UserDto userDto = new UserDto();
+            BeanUtils.copyProperties(user, userDto);
+            if(CollUtil.isNotEmpty(roles)) {
+                List<String> roleStrs = roles
+                        .stream()
+                        .map(item -> item.getId() + "_" + item.getName())
+                        .collect(Collectors.toList());
+                userDto.setRoles(roleStrs);
+            }
+            return userDto;
+        }
         return null;
     }
 
     @Override
     public User getCurrentUser() {
+        // TODO 获取当前用户信息
         return null;
     }
 }
