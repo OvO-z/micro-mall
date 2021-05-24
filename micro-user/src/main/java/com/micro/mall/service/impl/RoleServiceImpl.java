@@ -6,6 +6,7 @@ import com.micro.mall.mapper.RoleMapper;
 import com.micro.mall.mapper.RoleMenuRelationMapper;
 import com.micro.mall.mapper.RoleResourceRelationMapper;
 import com.micro.mall.model.*;
+import com.micro.mall.service.ResourceService;
 import com.micro.mall.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class RoleServiceImpl implements RoleService {
     private RoleDao roleDao;
 
     @Autowired
+    private ResourceService resourceService;
+
+    @Autowired
     private RoleMenuRelationMapper roleMenuRelationMapper;
 
     @Autowired
@@ -53,7 +57,7 @@ public class RoleServiceImpl implements RoleService {
         RoleExample example = new RoleExample();
         example.createCriteria().andIdIn(ids);
         int count = roleMapper.deleteByExample(example);
-        // TODO initResourceRolesMap
+        resourceService.initResourceRolesMap();
         return count;
     }
 
@@ -112,7 +116,7 @@ public class RoleServiceImpl implements RoleService {
             relation.setResourceId(resourceId);
             roleResourceRelationMapper.insert(relation);
         }
-        // TODO initResourceRoleMap
+        resourceService.initResourceRolesMap();
         return 0;
     }
 }

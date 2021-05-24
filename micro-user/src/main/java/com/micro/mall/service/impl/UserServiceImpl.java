@@ -5,12 +5,14 @@ import cn.hutool.crypto.digest.BCrypt;
 import com.github.pagehelper.PageHelper;
 import com.micro.mall.common.api.CommonResult;
 import com.micro.mall.common.domain.UserDto;
+import com.micro.mall.common.exception.Asserts;
 import com.micro.mall.dto.UserParam;
 import com.micro.mall.dto.UserPasswordParam;
 import com.micro.mall.mapper.UserMapper;
 import com.micro.mall.model.Resource;
 import com.micro.mall.model.User;
 import com.micro.mall.model.UserExample;
+import com.micro.mall.service.UserCacheService;
 import com.micro.mall.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
@@ -34,6 +36,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserCacheService userCacheService;
 
     @Override
     public User getUserByUsername(String username) {
@@ -68,9 +72,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CommonResult login(String username, String password) {
-        // TODO 用户名密码为空判断
         if (StrUtil.isEmpty(username) || StrUtil.isEmpty(password)) {
-
+            Asserts.fail("用户名或密码不能为空");
         }
         // TODO 登录操作
         return null;
@@ -109,13 +112,13 @@ public class UserServiceImpl implements UserService {
             }
         }
         int count = userMapper.updateByPrimaryKeySelective(user);
-        // TODO 用户缓存
+        userCacheService.setUser(user);
         return 0;
     }
 
     @Override
     public int delete(Long id) {
-        // TODO 用户缓存
+        userCacheService.deleteUser(id);
         return userMapper.deleteByPrimaryKey(id);
     }
 

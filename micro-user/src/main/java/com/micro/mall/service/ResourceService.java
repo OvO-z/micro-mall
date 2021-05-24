@@ -1,6 +1,7 @@
 package com.micro.mall.service;
 
 import com.micro.mall.model.Resource;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;

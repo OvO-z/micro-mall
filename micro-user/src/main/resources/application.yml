@@ -6,6 +6,15 @@ spring:
     username: root
     password: 123456
 
+redis:
+  host: localhost # Redis服务器地址
+  port: 6379 # Redis服务器连接端口
+  password:  # Redis服务器连接密码（默认为空）
+  timeout: 3000ms # 连接超时时间（毫秒）
+  database: mall
+  key: 'mall:user'
+  expire:
+    common: 86400 # 24小时
 
 # mybatis-mapper 扫描路径
 mybatis:
